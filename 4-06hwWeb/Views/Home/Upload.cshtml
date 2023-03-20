@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Upload";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 jumbotron">
+        <form method="post" action="/home/upload" enctype="multipart/form-data">
+            <input type="text" class="form-control" name="title" placeholder="Image Title"id="title" />
+            <br />
+            <input type="file" name="imageFile" id="img"/>
+            <br />
+            <button class="btn btn-primary" id="upload">Upload</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/Images.js"></script>
+}
+

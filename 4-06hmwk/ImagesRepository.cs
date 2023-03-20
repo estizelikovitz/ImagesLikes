@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,13 +35,14 @@ namespace _4_06hmwk
             return context.Images.FirstOrDefault(i => i.Id == id);
         }
 
-        //public void Update(Person person)
-        //{
-        //    using var context = new PeopleDataContext(_connectionString);
-        //    context.People.Attach(person);
-        //    context.Entry(person).State = EntityState.Modified;
-        //    context.SaveChanges();
-        //}
+
+        public void Update(Image image)
+        {
+            using var context = new DataContext(_connectionString);
+            context.Images.Attach(image);
+            context.Entry(image).State = EntityState.Modified;
+            context.SaveChanges();
+        }
 
         //public void Delete(int id)
         //{

@@ -1,0 +1,19 @@
+﻿@using _4_06hmwk;
+@model Image
+@{
+    ViewData["Title"] = "ViewImage";
+}
+
+<div class="row">
+    <input type="hidden" id="image-id" value="@Model.Id" />
+    <div class="col-md-10 col-md-offset-1 well">
+        <h1>@Model.Title</h1>
+        <img src="/uploads/@Model.ImageSource" style="width: 900px;" />
+        <br />
+        <br />
+        <button id="like-button" data-id="@Model.Id" class="btn btn-primary btn-lg">LIKE</button>                 Current Likes: <span id="likes-count">@Model.Likes</span>
+    </div>
+</div>
+@section Scripts {
+    <script src="/js/ViewImage.js"></script>
+}

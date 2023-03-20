@@ -65,9 +65,41 @@ namespace _4_06hwWeb.Controllers
             image.ImageSource = fileName;
             var connectionString = _configuration.GetConnectionString("ConStr");
             var repo = new ImagesRepository(connectionString);
-            image.DateCreated = DateTime.Now;
+            image.DateCreated = DateTime.Now.Date;
             repo.Add(image);
             return Redirect("/");
+        }
+        [HttpPost]
+        public void Likes(int id)
+
+        {
+
+            var cookie = Request.Cookies["was-here"];
+            if (cookie != null)
+            {
+                return;
+            }
+            var connectionString = _configuration.GetConnectionString("ConStr");
+            var repo = new ImagesRepository(connectionString);
+            Image img=repo.GetById(id);
+            img.Likes++;
+            repo.Update(img);
+            Response.Cookies.Append("was-here", id.ToString());
+
+        }
+        public string GetLikes(int id)
+        {
+            var connectionString = _configuration.GetConnectionString("ConStr");
+            var repo = new ImagesRepository(connectionString);
+            return repo.GetById(id).Likes.ToString();
+        }
+
+        public IActionResult ViewImage(int id)
+        {
+            var connectionString = _configuration.GetConnectionString("ConStr");
+            var repo = new ImagesRepository(connectionString);
+            Image img=repo.GetById(id);
+            return View(img);
         }
 
     }
